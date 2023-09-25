@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tradings/app/view/components/custom_animated_container.dart';
 
-import '../../../resources/custom_textstyles.dart';
+import '../../../res/custom_textstyles.dart';
 
 class SettingsWidget extends StatelessWidget {
   final String title;

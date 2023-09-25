@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:tradings/app/view/pages/bottom_nav/bottom_nav.dart';
 import '../../components/custom_button.dart';
-import '../../resources/my_colors.dart';
-import '../../resources/custom_textstyles.dart';
+import '../../res/my_colors.dart';
+import '../../res/custom_textstyles.dart';
 import 'presentation_model.dart';
 
 class PresentationPage extends StatefulWidget {
@@ -59,7 +59,7 @@ class _PresentationPageState extends State<PresentationPage> {
             child: CustomButton(
               height: 56,
               onPressed: () async {
-                if (_pageIndex == 2) {
+                if (_pageIndex == 3) {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

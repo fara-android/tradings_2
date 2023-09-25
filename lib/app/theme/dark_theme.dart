@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tradings/app/view/resources/my_colors.dart';
+import 'package:tradings/app/view/res/my_colors.dart';
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,

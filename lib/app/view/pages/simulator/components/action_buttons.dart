@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tradings/app/view/resources/custom_textstyles.dart';
-import 'package:tradings/app/view/resources/my_colors.dart';
+import 'package:tradings/app/view/res/custom_textstyles.dart';
+import 'package:tradings/app/view/res/my_colors.dart';
 
 class ActionButtons extends StatelessWidget {
   final Function() onUp;

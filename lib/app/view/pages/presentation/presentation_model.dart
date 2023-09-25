@@ -30,5 +30,11 @@ class ContentModelList {
       text:
           'The margin calculator will help you to calculate\nyour potential profit or loss on trades. Enter the\nrequired data and get accurate results.',
     ),
+    PresentationModel(
+      title: 'Trade simulator:',
+      image: "assets/images/presentation_four.png",
+      text:
+          'Trading on a convenient and clear simulator with many quotes and settings',
+    ),
   ];
 }

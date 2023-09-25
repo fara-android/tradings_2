@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../resources/my_colors.dart';
-import '../resources/custom_textstyles.dart';
+import '../res/my_colors.dart';
+import '../res/custom_textstyles.dart';
 import 'custom_animated_container.dart';
 
 class CustomButton extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../resources/custom_textstyles.dart';
+import '../../../res/custom_textstyles.dart';
 
 class CourseContainer extends StatelessWidget {
   final String image;

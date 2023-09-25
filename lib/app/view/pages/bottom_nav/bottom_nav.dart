@@ -17,7 +17,7 @@ class _BottomNavState extends State<BottomNav> {
     const HomePage(),
     const NewsPage(),
     const SimulatorPage(),
-    const CalculatorPage(),
+    CalculatorPage(),
     const SettingsPage()
   ];
   var currentIndex = 0;

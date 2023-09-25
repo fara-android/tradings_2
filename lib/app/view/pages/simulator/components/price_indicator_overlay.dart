@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../resources/my_colors.dart';
+import '../../../res/my_colors.dart';
 
 class PriceIndicatorOverlay extends StatelessWidget {
   final double price;

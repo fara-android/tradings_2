@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
-import '../../resources/my_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../res/my_colors.dart';
+import '../bottom_nav/bottom_nav.dart';
 import '../presentation/presentation_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -13,7 +15,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
-    _navigatetohome();
+    run();
     super.initState();
   }
 
@@ -32,14 +34,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  _navigatetohome() async {
-    await Future.delayed(const Duration(milliseconds: 1512), () {});
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const PresentationPage(),
-      ),
-    );
+  run() async {
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('isRunBefore')) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const BottomNav(),
+        ),
+      );
+    } else {
+      prefs.setBool('isRunBefore', false);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const PresentationPage(),
+        ),
+      );
+    }
   }
 }

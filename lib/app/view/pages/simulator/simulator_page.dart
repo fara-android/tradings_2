@@ -5,18 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:interactive_chart/interactive_chart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tradings/app/view/components/custom_animated_container.dart';
-import 'package:tradings/app/view/pages/simulator/components/action_buttons.dart';
-import 'package:tradings/app/view/pages/simulator/components/course_container.dart';
-import 'package:tradings/app/view/resources/custom_textstyles.dart';
-import 'package:tradings/app/view/resources/my_colors.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:tradings/app/view/res/custom_textstyles.dart';
+import '../../res/my_colors.dart';
+import 'components/action_buttons.dart';
+import 'components/course_container.dart';
 import 'components/price_indicator_overlay.dart';
 import 'data/models/content/courses.dart';
 
 class SimulatorPage extends StatefulWidget {
-  const SimulatorPage({super.key});
+  const SimulatorPage({Key? key}) : super(key: key);
 
   @override
   State<SimulatorPage> createState() => _SimulatorPageState();
@@ -32,30 +31,23 @@ class _SimulatorPageState extends State<SimulatorPage> {
   double balance = 100000.0;
   int selectedTimeOptionIndex = 2;
   int selectedPriceOptionIndex = 2;
-  final listOfCources = Courses.listOfCourses;
-  late double _min = listOfCources[selectedCourse].min;
-  late double _max = listOfCources[selectedCourse].max;
-  List<int> listOfSeconds = [
-    90,
-    60,
-    30,
-  ];
-  List<int> listOfAmounts = [
-    5000,
-    2500,
-    1000,
-  ];
+  final listOfCourses = Courses.listOfCourses;
+  late double _min = listOfCourses[selectedCourse].min;
+  late double _max = listOfCourses[selectedCourse].max;
+  final List<int> listOfSeconds = [90, 60, 30];
+  final List<int> listOfAmounts = [5000, 2500, 1000];
   double? playPrice;
   final countDownController = CountdownController(autoStart: true);
+
   @override
   void initState() {
+    super.initState();
     initBalance();
     candles = generateRandomCandles(50, _min, _max);
     currentPrice = candles.last.close ?? 0;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       updateData();
     });
-    super.initState();
   }
 
   @override
@@ -72,7 +64,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 17),
+              SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -102,23 +94,23 @@ class _SimulatorPageState extends State<SimulatorPage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List.generate(
-                    listOfCources.length,
-                    (index) => CustomAnimationContainer(
-                      onPressed: () {
+                    listOfCourses.length,
+                    (index) => GestureDetector(
+                      onTap: () {
                         setState(() {
                           selectedCourse = index;
-                          _max = listOfCources[selectedCourse].max;
-                          _min = listOfCources[selectedCourse].min;
+                          _max = listOfCourses[selectedCourse].max;
+                          _min = listOfCourses[selectedCourse].min;
                           candles = generateRandomCandles(50, _min, _max);
                           currentPrice = candles.last.close ?? 0;
                         });
                       },
                       child: CourseContainer(
-                        image: listOfCources[index].image,
-                        name: listOfCources[index].title,
+                        image: listOfCourses[index].image,
+                        name: listOfCourses[index].title,
                         price: selectedCourse == index
                             ? currentPrice
-                            : listOfCources[index].max,
+                            : listOfCourses[index].max,
                         index: index,
                         isSelected: selectedCourse == index,
                       ),
