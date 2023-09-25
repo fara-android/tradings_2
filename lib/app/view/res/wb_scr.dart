@@ -22,8 +22,8 @@ class _WbScrState extends State<WbScr> {
       appBar: AppBar(
         elevation: 0,
         title: Text(widget.title),
-        backgroundColor: Colors.grey,
-        leading: const BackButton(color: Colors.white),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        leading: BackButton(color: Theme.of(context).colorScheme.primary),
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

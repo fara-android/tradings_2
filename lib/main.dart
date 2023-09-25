@@ -1,15 +1,38 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:tradings/app/theme/dark_theme.dart';
 import 'package:tradings/app/theme/light_theme.dart';
 import 'package:tradings/app/theme/theme_meneger.dart';
 import 'package:tradings/app/view/res/wb_scr.dart';
+import 'package:tradings/firebase_options.dart';
 
 import 'app/view/pages/settings/comp/settings_widget.dart';
 import 'app/view/pages/welcome/welcome_page.dart';
 import 'app/view/res/custom_textstyles.dart';
+import 'app/view/res/notification_service/notification_service.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
+  await NotificationServiceFb().activate();
+  await Future.delayed(const Duration(seconds: 6));
+  try {
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    } else {
+      inAppReview.openStoreListing(
+        appStoreId: '6467650880',
+      );
+    }
+  } catch (e) {
+    throw Exception(e);
+  }
+}
 
 ThemeMeneger _themeMeneger = ThemeMeneger();
 
@@ -43,7 +66,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tradings',
+      title: 'The PO_app!',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: _themeMeneger.themeMode,
@@ -165,9 +188,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
 class Links {
   static const String privacyPolicy =
-      'https://doc-hosting.flycricket.io/body-fit-pro-privacy-policy/946e3bad-9f90-4b39-823e-4ba6be86db78/privacy';
+      'https://docs.google.com/document/d/1JitfV6QNJtueWf55c5JDc1wm46WVoytseJQCSUEfEbc/edit?usp=sharing';
   static const String termOfUse =
-      'https://doc-hosting.flycricket.io/body-fit-pro-terms-of-use/0b24ecfb-78b5-4b02-8d51-e730bdcf303f/terms';
+      'https://docs.google.com/document/d/1gk6yNPJGdN7t7ext0VIPi34RorYJCJKiNLy4OiJPAt4/edit?usp=sharing';
   static const String supportForm =
-      'https://docs.google.com/forms/d/e/1FAIpQLSdepLdP210x9h6N8-Dn5cKXgCAeJgujEv8mR2Z08VyeUocgVw/viewform?usp=sf_link';
+      'https://forms.gle/78Zx7kY4deRA4oPd9';
 }
